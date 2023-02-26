@@ -10,7 +10,7 @@ const Navbar = () => {
     <>
       <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
-          <a class="navbar-brand mx-5 text-white" href="#">
+          <a class="navbar-brand mx-5 text-white" href='/#'>
             Project Planning
           </a>
           <div class="collapse navbar-collapse" id="navbarNav">
@@ -23,12 +23,12 @@ const Navbar = () => {
 
               </li>
               <li class="nav-item px-2">
-                <a class="nav-link active mx-2 text-white" aria-current="page" href="#">
+                <a class="nav-link active mx-2 text-white" aria-current="page" href="/#">
                   About Us
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active mx-2 text-white" aria-current="page" href="#">
+                <a class="nav-link active mx-2 text-white" aria-current="page" href="/#">
                   Contact Us
                 </a>
               </li>

@@ -10,11 +10,11 @@ import Dashboard from "../pages/Dashboard";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <><section className="vh-100"><Navbar/><SignIn/></section></>,
+    element: <><section className="h-100"><Navbar/><SignIn/></section></>,
   },
   {
     path : "/register",
-    element :  <><section className="vh-100"><Navbar/><Registration/></section></>
+    element :  <><section className="h-100"><Navbar/><Registration/></section></>
   },
   {
     path:"/dashboard",

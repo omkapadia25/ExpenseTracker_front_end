@@ -1,4 +1,4 @@
-import React,{useContext, useState} from "react";
+import React, {useState} from "react";
 import "./signIn.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -39,7 +39,7 @@ const SignIn = () => {
       const res=await axios.post("api/v1/auth/login",data);
       if(res){
         console.log("s");
-        // navigate("/dashboard");
+        navigate("/dashboard");
       }
       else{
 
@@ -53,7 +53,7 @@ const SignIn = () => {
 
   return (
     <>
-        <div className="container-fluid mt-5" style={{height:"85%"}}>
+        <div className="container-fluid mt-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-75">
             <div className="col-md-9 col-lg-6 col-xl-5">
               <img

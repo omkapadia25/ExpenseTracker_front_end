@@ -62,6 +62,7 @@ const Registration = () => {
         setName("");
         setNumber("");
         alert("Register Succesfully")
+        navigate('/login')
 
       }else{
         console.log("something went wrong")
@@ -75,7 +76,7 @@ const Registration = () => {
 
   return (
     <>
-        <div className="container-fluid  mt-5" style={{height:"85%"}}>
+        <div className="container-fluid  mt-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-75">
             <div className="col-md-9 col-lg-6 col-xl-5">
               <img
