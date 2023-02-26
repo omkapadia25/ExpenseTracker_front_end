@@ -1,16 +1,21 @@
-import React,{useState} from "react";
+import React,{useContext, useState} from "react";
 import "./signIn.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "font-awesome/css/font-awesome.min.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import validator from "validator";
+import { useUserContext } from "../../context/user_context";
+import axios from "axios";
 
 const SignIn = () => {
+  const navigate=useNavigate();
   const [emailError,setEmailError]=useState();
   const [passwordError,setPasswordError]=useState();
+  const{email,password,setEmail,setPassword}=useUserContext()
 
   const validatePassword=(e)=>{
+    setPassword(e.target.value)
     if(validator.isStrongPassword(e.target.value)){
       setPasswordError("Strong Password")
 
@@ -20,18 +25,36 @@ const SignIn = () => {
   }
 
   const validateEmail=(e)=>{
+    setEmail(e.target.value)
     if(validator.isEmail(e.target.value)){
       setEmailError("Valid Email");
     }else{
       setEmailError("Invalid Email*");
     }
   }
+  const handleSignInClick=async()=>{
+    try {
+      const data={email,password};
+      console.log(data);
+      const res=await axios.post("api/v1/auth/login",data);
+      if(res){
+        console.log("s");
+        // navigate("/dashboard");
+      }
+      else{
+
+      }
+    } catch (error) {
+      // console.log("here");
+      console.log(error)
+    }
+
+  }
 
   return (
     <>
-      <section className="vh-100">
-        <div className="container-fluid h-custom">
-          <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="container-fluid mt-5" style={{height:"85%"}}>
+          <div className="row d-flex justify-content-center align-items-center h-75">
             <div className="col-md-9 col-lg-6 col-xl-5">
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
@@ -72,26 +95,14 @@ const SignIn = () => {
                   </button>
                 </div>
 
-                <div className="divider d-flex align-items-center mt-4">
-                  <p className="text-center fw-bold mx-3 mb-0">Or</p>
+                <div className="divider d-flex align-items-center my-4">
+                  <p className="text-center fw-bold mx-3 ">Or</p>
                 </div>
 
-        <div className="d-flex justify-content-around mb-2 ">
+                { 
+                email && <span className={emailError==="Valid Email"?"text-success":"text-danger"}>{emailError}</span>
+                }
 
-                <div class="form-check ">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                <label class="form-check-label" for="flexRadioDefault1">
-                    Member
-                </label>
-                </div>
-                <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-                <label class="form-check-label" for="flexRadioDefault2">
-                    Creator
-                </label>
-                </div>
-        </div>
-        <span className={emailError==="Valid Email"?"text-success":"text-danger"}>{emailError}</span>
                 <div className="form-group mb-2">
                   <input
                     type="email"
@@ -101,7 +112,9 @@ const SignIn = () => {
                     onChange={validateEmail}
                   />
                 </div>
-        <span className={passwordError==="Strong Password"?"text-success":"text-danger"}>{passwordError}</span>
+                {
+               password && <span className={passwordError==="Strong Password"?"text-success":"text-danger"}>{passwordError}</span>
+                }
                 <div className="form-group mb-2">
                   <input
                     type="password"
@@ -114,7 +127,12 @@ const SignIn = () => {
 
 
                 <div className="text-center text-lg-start mt-3 pt-2 d-flex justify-content-center flex-column ">
-                  <button type="button" className="btn btn-primary" disabled={(emailError==="Valid Email" && passwordError==="Strong Password")?false:true} >
+                  <button 
+                    type="button" 
+                    className="btn btn-primary" 
+                    disabled={(emailError==="Valid Email" && passwordError==="Strong Password")?false:true} 
+                    onClick={handleSignInClick}
+                    >
                     Login
                   </button>
                   <div className="small fw-bold mt-2 pt-1 mb-0">
@@ -127,25 +145,6 @@ const SignIn = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-          <div className="text-white mb-3 mb-md-0"></div>
-
-          <div>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-google"></i>
-            </a>
-            <a href="#!" className="text-white">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-          </div>
-        </div>
-      </section>
     </>
   );
 };

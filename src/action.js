@@ -1,0 +1,6 @@
+export const LOGIN_CREATER = "LOGIN_CREATER"
+export const LOGIN_MEMBER = "LOGIN_MEMBER"
+export const set_Email = "set_Email"
+export const set_Password = "set_Password"
+export const set_Name = "set_Name"
+export const set_Number = "set_Number"

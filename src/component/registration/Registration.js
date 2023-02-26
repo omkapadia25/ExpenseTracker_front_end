@@ -1,17 +1,29 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import "./Registration.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import  validator  from 'validator';
+import { useUserContext } from "../../context/user_context";
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 // import { Link } from "react-router-dom";
 
 const Registration = () => {
+  useEffect(()=>{
+    setEmail("");
+    setPassword("");
+  },[])
+  
+  const navigate=useNavigate();
+  const {name,email,password,number,setName, setNumber,setEmail,setPassword}=useUserContext();
   const [emailError,setEmailError]=useState();
   const [passwordError,setPasswordError]=useState();
   const [numberError,setNumberError]=useState();
 
+
   const validateEmail=(e)=>{
+    setEmail(e.target.value)
     if(validator.isEmail(e.target.value)){
       setEmailError("Valid Email");
     }else{
@@ -20,7 +32,7 @@ const Registration = () => {
   }
 
   const validateNumber=(e)=>{
-
+    setNumber(e.target.value);
     if(e.target.value.length===10)
     {
       setNumberError("Phone Number Valid")
@@ -31,6 +43,7 @@ const Registration = () => {
 
   }
   const validatePassword=(e)=>{
+    setPassword(e.target.value);
     if(validator.isStrongPassword(e.target.value)){
       setPasswordError("Strong Password")
 
@@ -39,13 +52,31 @@ const Registration = () => {
     }
   }
 
+  const handleRegisterClick=async()=>{
+    const data={name,email,password,number}
+    try {
+      const res=await axios.post("api/v1/auth/register",data);
+      if(res){
+        setEmail("");
+        setPassword("");
+        setName("");
+        setNumber("");
+        alert("Register Succesfully")
+
+      }else{
+        console.log("something went wrong")
+      }
+    } catch (err) {
+      
+    }
+    console.log(data)
+  }
 
 
   return (
     <>
-      <section className="vh-100">
-        <div className="container-fluid h-custom">
-          <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="container-fluid  mt-5" style={{height:"85%"}}>
+          <div className="row d-flex justify-content-center align-items-center h-75">
             <div className="col-md-9 col-lg-6 col-xl-5">
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
@@ -91,17 +122,23 @@ const Registration = () => {
                 </div>
                 <div className="form-group mb-2">
                   <input
+                  value={name}
                     type="text"
-                    id="form3Example4"
+                    id="form3Example6"
                     className="form-control"
                     placeholder="Enter Your Name"
+                    onChange={(e)=>{
+                      setName(e.target.value);
+                    }}
                   />
                 </div>
 
-                <span className={emailError==="Valid Email"?"text-success":"text-danger"}>{emailError}</span>
-
+          { 
+          email && <span className={emailError==="Valid Email"?"text-success":"text-danger"}>{emailError}</span>
+          }
                 <div className="form-group mb-2">
                   <input
+                  value={email}
                     type="email"
                     id="form3Example3"
                     className="form-control "
@@ -109,9 +146,12 @@ const Registration = () => {
                     onChange={validateEmail}
                   />
                 </div>
-                <span className={passwordError==="Strong Password"?"text-success":"text-danger"}>{passwordError}</span>
+                {
+                 password && <span className={passwordError==="Strong Password"?"text-success":"text-danger"}>{passwordError}</span>
+                }
                 <div className="form-group mb-2">
                   <input
+                  value={password}
                     type="password"
                     id="form3Example4"
                     className="form-control"
@@ -119,13 +159,15 @@ const Registration = () => {
                     onChange={validatePassword}
                   />
                 </div>
-
-                <span className={numberError==="Phone Number Valid"?"text-success":"text-danger"}>{numberError}</span>
+                {
+                  number && <span className={numberError==="Phone Number Valid"?"text-success":"text-danger"}>{numberError}</span>
+                }
 
                 <div className="form-group mb-2">
                   <input
+                  value={number}
                     type="number"
-                    id="form3Example4"
+                    id="form3Example5"
                     className="form-control"
                     placeholder="Enter Phone"
                     onChange={validateNumber}
@@ -134,7 +176,12 @@ const Registration = () => {
 
 
                 <div className="text-center text-lg-start mt-3 pt-2 d-flex justify-content-center flex-column ">
-                  <button type="button" className="  btn btn-primary" disabled={(emailError==="Valid Email" && passwordError==="Strong Password")?false:true}>
+                  <button 
+                  type="button" 
+                  className="  btn btn-primary" 
+                  disabled={(emailError==="Valid Email" && numberError==="Phone Number Valid"&& passwordError==="Strong Password")?false:true}
+                  onClick={handleRegisterClick}
+                  >
                     Submit
                   </button>
                 </div>
@@ -142,25 +189,8 @@ const Registration = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-          <div className="text-white mb-3 mb-md-0"></div>
 
-          <div>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-google"></i>
-            </a>
-            <a href="#!" className="text-white">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-          </div>
-        </div>
-      </section>
+
     </>
   );
 };
