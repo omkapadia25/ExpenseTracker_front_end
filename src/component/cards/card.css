@@ -1,0 +1,41 @@
+/* html { font-size: 22px; }
+body { padding: 1rem; } */
+
+.card {
+    background-color: #b3b5c2;
+    background-image: linear-gradient(43deg, #b3b5c2 12%, #d0dce5 76%);
+    
+    
+  color: #183153;
+  padding: 1rem;
+  height:max-content;
+}
+
+.cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.green{
+    border: 2px solid green;
+}
+
+.red{
+    border: 2px solid red;
+}
+
+.black{
+    border: 2px solid black;
+}
+.blue{
+    border: 2px solid blue;
+}
+.link{
+    color: #183153;
+}
+.link:hover{
+    color: #183153;
+}

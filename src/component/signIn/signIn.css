@@ -14,3 +14,11 @@ height: calc(100% - 73px);
 height: 100%;
 }
 }
+
+/* @media (max-width: 993px) {
+        .img-fluid{
+            height: 472px;
+            width: 320px;
+        }
+    }
+     */

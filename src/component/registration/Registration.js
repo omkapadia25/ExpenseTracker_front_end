@@ -62,7 +62,6 @@ const Registration = () => {
         setName("");
         setNumber("");
         alert("Register Succesfully")
-        navigate('/login')
 
       }else{
         console.log("something went wrong")
@@ -76,11 +75,12 @@ const Registration = () => {
 
   return (
     <>
-        <div className="container-fluid  mt-5 h-100">
-          <div className="row d-flex justify-content-center align-items-center h-75">
+      <section className="vh-100">
+        <div className="container-fluid h-custom">
+          <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-md-9 col-lg-6 col-xl-5">
               <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                src="https://cdn.pixabay.com/photo/2019/06/19/07/13/email-4284157_960_720.png"
                 className="img-fluid"
                 alt="Sample"
               />
@@ -91,35 +91,40 @@ const Registration = () => {
                   <p className="lead fw-normal mb-0 me-3">Sign up with</p>
                   <button
                     type="button"
-                    className="btn btn-primary btn-floating mx-1"
+                    className="btn  btn-floating mx-1"
+                 
                   >
                     <i className="fa fa-facebook"></i>
                   </button>
 
                   <button
                     type="button"
-                    className="btn btn-primary btn-floating mx-1"
+                    className="btn  btn-floating mx-1"
+                    // style={{backgroundColor:"#d0dce5"}}
                   >
                     <i className="fa fa-twitter"></i>
                   </button>
 
                   <button
                     type="button"
-                    className="btn btn-primary btn-floating mx-1"
+                    className="btn btn-floating mx-1"
+                  
+ 
                   >
                     <i className="fa fa-linkedin"></i>
                   </button>
 
                   <button
                     type="button"
-                    className="btn btn-primary btn-floating mx-1"
+                    className="btn btn-floating mx-1"
+                  
                   >
                     <i className="fa fa-google"></i>
                   </button>
                 </div>
 
-                <div className="divider d-flex align-items-center mt-4">
-                  <p className="text-center fw-bold mx-3 mb-0">Or</p>
+                <div className="divider d-flex align-items-center my-4">
+                  <p className="text-center fw-bold mx-3 ">Or</p>
                 </div>
                 <div className="form-group mb-2">
                   <input
@@ -179,9 +184,10 @@ const Registration = () => {
                 <div className="text-center text-lg-start mt-3 pt-2 d-flex justify-content-center flex-column ">
                   <button 
                   type="button" 
-                  className="  btn btn-primary" 
+                  className=" btn" 
                   disabled={(emailError==="Valid Email" && numberError==="Phone Number Valid"&& passwordError==="Strong Password")?false:true}
                   onClick={handleRegisterClick}
+                  style={{backgroundColor:"#d0dce5" ,color:"#183153",fontWeight:"900"}}
                   >
                     Submit
                   </button>
@@ -191,7 +197,7 @@ const Registration = () => {
           </div>
         </div>
 
-
+      </section>
     </>
   );
 };

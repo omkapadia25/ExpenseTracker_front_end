@@ -1,6 +1,6 @@
 import {
    set_Email,
-   set_Name,set_Number,set_Password
+   set_Name,set_Number,set_Password,set_Data
 }
 from "../action";
 
@@ -31,7 +31,9 @@ if(action.type===set_Name){
         // console.log(action.payload);
         return {...state, password: action.payload}
     }
-
+    if(action.type===set_Data){
+        return {...state,data:action.payload}
+    }
 
 
 

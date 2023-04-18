@@ -4,7 +4,8 @@ import {
 set_Email,
 set_Password,
 set_Number,
-set_Name
+set_Name,
+set_Data
 }
 from "../action";
 
@@ -14,6 +15,20 @@ const initialState = {
     email: "",
     password: "",
     number: "",
+    data:{
+        Amount:{
+            totalAmount:0,
+            expense:0,
+            savings:0,
+            investment:0
+
+        },pagination:{
+            count:0,
+        },
+        ResultSet:[
+
+        ]
+    }
     
 }
 
@@ -37,12 +52,15 @@ export const UserProvider = ({ children }) => {
     const setPassword = (val) => {
         dispath({type: set_Password, payload: val})
     }
+    const setData=(val)=>{
+        dispath({type:set_Data,payload:val})
+    }
     
 
     
 
     return (
-        <UserContext.Provider value={{...state, setName, setNumber, setEmail, setPassword}}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{...state, setName, setNumber, setEmail, setPassword,setData}}>{children}</UserContext.Provider>
       )
 }
 

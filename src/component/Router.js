@@ -3,24 +3,33 @@
 import { createBrowserRouter } from "react-router-dom";
 import SignIn from "./signIn/SignIn";
 import Registration from "./registration/Registration";
-import Navbar from "./Navbar";
 import Dashboard from "../pages/Dashboard";
+import TransactionForm from "../pages/TransactionForm";
+import Card from "./cards/Card";
+import Details from "./details/Details";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <><section className="h-100"><Navbar/><SignIn/></section></>,
+    element: <SignIn />,
   },
   {
     path : "/register",
-    element :  <><section className="h-100"><Navbar/><Registration/></section></>
+    element : <Registration />
   },
   {
     path:"/dashboard",
     element: <Dashboard/>
+  },
+  {
+    path:"/addTransactions",
+    element:<TransactionForm/>
+  },
+  {
+    path:"/details/:index",
+    element:<Details/>
   }
-  
 ]);
 
 export default router ;
